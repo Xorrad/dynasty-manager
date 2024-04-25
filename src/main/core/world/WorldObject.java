@@ -1,6 +1,8 @@
 package main.core.world;
 
 import main.core.world.character.Character;
+import main.core.world.dynasty.Dynasty;
+import main.core.world.dynasty.House;
 import main.util.IHasId;
 
 import java.util.HashMap;
@@ -10,6 +12,8 @@ public abstract class WorldObject implements IHasId {
     // Check https://stackoverflow.com/a/12222656 to support modding.
     public enum Type {
         CHARACTER(Character.class),
+        DYNASTY(Dynasty.class),
+        HOUSE(House.class)
         /*LAND,
         CLAIM,
         SECRET,
@@ -23,6 +27,14 @@ public abstract class WorldObject implements IHasId {
 
         public Class<? extends WorldObject> getTargetClass() {
             return targetClass;
+        }
+
+        public static Type get(Class<? extends WorldObject> clazz) {
+            for(Type type : Type.values()) {
+                if(type.getTargetClass() == clazz)
+                    return type;
+            }
+            return null;
         }
     }
 
