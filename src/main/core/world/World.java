@@ -1,5 +1,6 @@
 package main.core.world;
 
+import main.core.world.character.Character;
 import main.util.IdMap;
 
 import java.util.HashMap;
@@ -14,6 +15,10 @@ public class World {
 
     public <T extends WorldObject> IdMap<T> getObjects(WorldObject.Type type) {
         return (IdMap<T>) this.objects.get(type);
+    }
+
+    public IdMap<Character> getCharacters() {
+        return this.<Character>getObjects(WorldObject.Type.CHARACTER);
     }
 
     private void initObjects() {

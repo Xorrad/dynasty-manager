@@ -6,6 +6,8 @@ import main.util.IHasId;
 import java.util.HashMap;
 
 public abstract class WorldObject implements IHasId {
+
+    // Check https://stackoverflow.com/a/12222656 to support modding.
     public enum Type {
         CHARACTER(Character.class),
         /*LAND,
