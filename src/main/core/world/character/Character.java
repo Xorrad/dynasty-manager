@@ -5,7 +5,7 @@ import main.core.world.World;
 import main.core.world.character.relations.Relation;
 import main.core.world.dynasty.Dynasty;
 import main.core.world.dynasty.House;
-import main.core.world.map.title.Title;
+import main.core.world.title.Title;
 import main.util.Location;
 
 import java.util.ArrayList;

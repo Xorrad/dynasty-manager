@@ -6,7 +6,7 @@ import main.core.world.dynasty.House;
 import main.core.world.map.Land;
 import main.core.world.map.Tile;
 import main.core.world.map.TileGroup;
-import main.core.world.map.title.Title;
+import main.core.world.title.Title;
 import main.util.IHasId;
 
 import java.util.HashSet;

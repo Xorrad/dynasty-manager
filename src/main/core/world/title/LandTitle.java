@@ -1,4 +1,4 @@
-package main.core.world.map.title;
+package main.core.world.title;
 
 import main.core.world.World;
 import main.core.world.map.Land;
