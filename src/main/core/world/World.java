@@ -68,6 +68,7 @@ public class World {
             for(int x = 0; x < DEFAULT_MAP_WIDTH; x++) {
                 Location location = new Location(x, y);
                 Tile tile = new Tile(this, location);
+                this.addObject(tile);
                 this.map.put(location, tile);
             }
         }

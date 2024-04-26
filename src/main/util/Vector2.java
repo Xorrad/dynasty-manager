@@ -1,5 +1,7 @@
 package main.util;
 
+import java.util.Objects;
+
 public class Vector2<T> {
     private T x;
     private T y;
@@ -26,11 +28,15 @@ public class Vector2<T> {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if(!(obj instanceof Vector2))
-            return false;
-        Vector2 v2 = (Vector2) obj;
-        return v2.getX() == this.x && v2.getY() == this.y;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Vector2<?> vector2)) return false;
+        return Objects.equals(x, vector2.x) && Objects.equals(y, vector2.y);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 
     @Override

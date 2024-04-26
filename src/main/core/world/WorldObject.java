@@ -4,8 +4,12 @@ import main.core.world.character.Character;
 import main.core.world.dynasty.Dynasty;
 import main.core.world.dynasty.House;
 import main.core.world.map.Land;
+import main.core.world.map.Tile;
+import main.core.world.map.TileGroup;
 import main.core.world.map.title.Title;
 import main.util.IHasId;
+
+import java.util.HashSet;
 
 public abstract class WorldObject implements IHasId {
 
@@ -14,26 +18,28 @@ public abstract class WorldObject implements IHasId {
         CHARACTER(Character.class),
         DYNASTY(Dynasty.class),
         HOUSE(House.class),
-        LAND(Land.class),
+        LAND(Land.class, Tile.class, TileGroup.class),
         TITLE(Title.class)
         /*LAND,
         CLAIM,
         SECRET,
         TITLE*/;
 
-        private Class<? extends WorldObject> targetClass;
+        private HashSet<Class<? extends WorldObject>> targetClasses;
 
-        Type(Class<? extends WorldObject> targetClass) {
-            this.targetClass = targetClass;
+        Type(Class<? extends WorldObject>... targetClasses) {
+            this.targetClasses = new HashSet<>();
+            for(Class<? extends WorldObject> targetClass : targetClasses)
+                this.targetClasses.add(targetClass);
         }
 
-        public Class<? extends WorldObject> getTargetClass() {
-            return targetClass;
+        public HashSet<Class<? extends WorldObject>> getTargetClasses() {
+            return this.targetClasses;
         }
 
         public static Type get(Class<? extends WorldObject> clazz) {
             for(Type type : Type.values()) {
-                if(type.getTargetClass() == clazz)
+                if(type.getTargetClasses().contains(clazz))
                     return type;
             }
             return null;

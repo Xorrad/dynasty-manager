@@ -18,6 +18,10 @@ public class TileGroup extends Land {
         return this.contents;
     }
 
+    public int getSize() {
+        return this.contents.size();
+    }
+
     public void addLand(Land land) {
         this.contents.put(land.getId(), land);
     }
@@ -26,7 +30,7 @@ public class TileGroup extends Land {
     public boolean removeLand(Land land) {
         // If direct child, then remove from hashmap.
         if(this.contents.containsKey(land.getId())) {
-            this.contents.remove(land);
+            this.contents.remove(land.getId());
             return true;
         }
 
@@ -48,7 +52,7 @@ public class TileGroup extends Land {
         if(!deep)
             return false;
         for(Land l : this.contents.values()) {
-            if(l.hasLand(l, true))
+            if(l.hasLand(land, true))
                 return true;
         }
         return false;
