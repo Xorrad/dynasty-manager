@@ -11,7 +11,7 @@ public class MotherRelation extends Relation {
 
     @Override
     public String getFirstLabel() {
-        return "father";
+        return "mother";
     }
 
     @Override
