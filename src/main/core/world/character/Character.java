@@ -6,6 +6,7 @@ import main.core.world.character.relations.Relation;
 import main.core.world.dynasty.Dynasty;
 import main.core.world.dynasty.House;
 import main.core.world.map.title.Title;
+import main.util.Location;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +16,14 @@ public class Character extends WorldObject {
     private House house;
     private ArrayList<Relation> relations;
     private ArrayList<Title> titles;
+    private Location location;
 
     public Character(World world) {
         super(world);
         this.house = world.getDefaultHouse();
         this.relations = new ArrayList<>();
         this.titles = new ArrayList<>();
+        this.location = new Location(0, 0);
     }
 
     public String getName() {
@@ -104,6 +107,14 @@ public class Character extends WorldObject {
         return this.titles.stream().toList();
     }
 
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
     public static class Builder {
         private Character character;
 
@@ -119,6 +130,11 @@ public class Character extends WorldObject {
 
         public Character.Builder house(House house) {
             this.character.switchHouse(house);
+            return this;
+        }
+
+        public Character.Builder location(Location location) {
+            this.character.location = location;
             return this;
         }
 
