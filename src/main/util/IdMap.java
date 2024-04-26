@@ -39,4 +39,11 @@ public class IdMap<T extends IHasId> extends HashMap<Integer, T> {
         else if(key instanceof Integer && (Integer) key == this.lastId) this.lastId--;
         return super.remove(key);
     }
+
+    @Override
+    public boolean containsValue(Object value) {
+        if(value == null || !(value instanceof IHasId))
+            return false;
+        return super.containsKey(((IHasId) value).getId());
+    }
 }

@@ -30,6 +30,13 @@ public class World {
         this.objects.get(type).add(object);
     }
 
+    public void removeObject(WorldObject object) {
+        WorldObject.Type type = WorldObject.Type.get(object.getClass());
+        if(type == null)
+            throw new RuntimeException("world object does not have registered type.");
+        this.objects.get(type).remove(object);
+    }
+
     public <T extends WorldObject> IdMap<T> getObjects(WorldObject.Type type) {
         return (IdMap<T>) this.objects.get(type);
     }
