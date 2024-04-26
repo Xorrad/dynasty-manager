@@ -10,6 +10,10 @@ public class IdMap<T extends IHasId> extends HashMap<Integer, T> {
         this.lastId = 0;
     }
 
+    public int getLastId() {
+        return lastId;
+    }
+
     public int getNewId() {
         return ++lastId;
     }
@@ -28,7 +32,11 @@ public class IdMap<T extends IHasId> extends HashMap<Integer, T> {
 
     @Override
     public T remove(Object key) {
-        if(key instanceof Integer && (Integer) key == this.lastId) this.lastId--;
+        if(key instanceof IHasId) {
+            if(((IHasId) key).getId() == this.lastId) this.lastId--;
+            return super.remove(((IHasId) key).getId());
+        }
+        else if(key instanceof Integer && (Integer) key == this.lastId) this.lastId--;
         return super.remove(key);
     }
 }
