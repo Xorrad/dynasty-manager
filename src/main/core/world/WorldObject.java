@@ -3,9 +3,9 @@ package main.core.world;
 import main.core.world.character.Character;
 import main.core.world.dynasty.Dynasty;
 import main.core.world.dynasty.House;
+import main.core.world.map.Land;
+import main.core.world.map.title.Title;
 import main.util.IHasId;
-
-import java.util.HashMap;
 
 public abstract class WorldObject implements IHasId {
 
@@ -13,7 +13,9 @@ public abstract class WorldObject implements IHasId {
     public enum Type {
         CHARACTER(Character.class),
         DYNASTY(Dynasty.class),
-        HOUSE(House.class)
+        HOUSE(House.class),
+        LAND(Land.class),
+        TITLE(Title.class)
         /*LAND,
         CLAIM,
         SECRET,

@@ -5,6 +5,7 @@ import main.core.world.World;
 import main.core.world.character.relations.Relation;
 import main.core.world.dynasty.Dynasty;
 import main.core.world.dynasty.House;
+import main.core.world.map.title.Title;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +14,13 @@ public class Character extends WorldObject {
     private String name;
     private House house;
     private ArrayList<Relation> relations;
+    private ArrayList<Title> titles;
 
     public Character(World world) {
         super(world);
         this.house = world.getDefaultHouse();
         this.relations = new ArrayList<>();
+        this.titles = new ArrayList<>();
     }
 
     public String getName() {
@@ -57,32 +60,48 @@ public class Character extends WorldObject {
     }
 
     public boolean hasRelation(Class<? extends Relation> clazz) {
-        return relations.stream()
+        return this.relations.stream()
                 .filter(r -> r.getClass() == clazz)
                 .findFirst()
                 .isPresent();
     }
 
     public boolean hasRelation(Class<? extends Relation> clazz, Character character) {
-        return relations.stream()
+        return this.relations.stream()
                 .filter(r -> (r.getClass() == clazz && r.isPartOf(character)))
                 .findFirst()
                 .isPresent();
     }
 
     public Relation getRelation(Class<? extends Relation> clazz) {
-        return relations.stream()
+        return this.relations.stream()
                 .filter(r -> r.getClass() == clazz)
                 .findFirst()
                 .orElseGet(() -> null);
     }
 
     public List<Relation> getCharacterRelations(Character character) {
-        return relations.stream().filter(r -> r.isPartOf(character)).toList();
+        return this.relations.stream().filter(r -> r.isPartOf(character)).toList();
     }
 
     public List<Relation> getRelations() {
         return this.relations.stream().toList();
+    }
+
+    public void addTitle(Title title) {
+        this.titles.add(title);
+    }
+
+    public void removeTitle(Title title) {
+        this.titles.remove(title);
+    }
+
+    public boolean hasTitle(Title title) {
+        return this.titles.contains(title);
+    }
+
+    public List<Title> getTitles() {
+        return this.titles.stream().toList();
     }
 
     public static class Builder {

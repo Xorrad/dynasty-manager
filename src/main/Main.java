@@ -9,7 +9,7 @@ import main.core.world.dynasty.House;
 
 public class Main {
     public static void main(String[] args) {
-
+        
         World world = new World();
 
         Dynasty dyn1 = new Dynasty.Builder(world).name("Meyers").get();
