@@ -8,6 +8,7 @@ import main.core.world.dynasty.House;
 import main.core.world.modifier.FactorAmount;
 import main.core.world.modifier.Modifier;
 import main.core.world.title.Title;
+import main.core.world.trait.Trait;
 import main.util.Location;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class Character extends WorldObject {
     private House house;
     private ArrayList<Relation> relations;
     private ArrayList<Title> titles;
+    private ArrayList<Trait> traits;
     private Location location;
 
     public Character(World world) {
@@ -25,6 +27,7 @@ public class Character extends WorldObject {
         this.house = world.getDefaultHouse();
         this.relations = new ArrayList<>();
         this.titles = new ArrayList<>();
+        this.traits = new ArrayList<>();
         this.location = new Location(0, 0);
     }
 
@@ -107,6 +110,22 @@ public class Character extends WorldObject {
 
     public List<Title> getTitles() {
         return this.titles.stream().toList();
+    }
+
+    public void addTrait(Trait title) {
+        this.traits.add(title);
+    }
+
+    public void removeTrait(Trait title) {
+        this.traits.remove(title);
+    }
+
+    public boolean hasTrait(Trait title) {
+        return this.traits.contains(title);
+    }
+
+    public List<Trait> getTraits() {
+        return this.traits.stream().toList();
     }
 
     public Location getLocation() {

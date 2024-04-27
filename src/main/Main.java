@@ -6,6 +6,7 @@ import main.core.world.character.Character;
 import main.core.world.character.relations.FatherRelation;
 import main.core.world.dynasty.Dynasty;
 import main.core.world.dynasty.House;
+import main.core.world.trait.Traits;
 
 public class Main {
     public static void main(String[] args) {
@@ -19,6 +20,7 @@ public class Main {
         Character c2 = new Character.Builder(world).name("Antonin").get();
         FatherRelation r1 = new FatherRelation(c1, c2);
         c1.addRelation(r1);
+        c1.addTrait(Traits.ATHLETIC);
 
         //world.<Character>getObjects(WorldObject.Type.CHARACTER).forEach((id, c) -> System.out.println(c.getId() + " " + c.getName()));
         world.<House>getObjects(WorldObject.Type.HOUSE).forEach((id, h) -> System.out.println(id + " " + h.getId() + " " + h.getName() + " " + h.getMembers().size()));
