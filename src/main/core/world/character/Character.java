@@ -5,6 +5,8 @@ import main.core.world.World;
 import main.core.world.character.relations.Relation;
 import main.core.world.dynasty.Dynasty;
 import main.core.world.dynasty.House;
+import main.core.world.modifier.FactorAmount;
+import main.core.world.modifier.Modifier;
 import main.core.world.title.Title;
 import main.util.Location;
 
@@ -113,6 +115,20 @@ public class Character extends WorldObject {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public FactorAmount getTotalModifier(Modifier.Type type) {
+        // Initialize à default value and increment it with all the modifiers in traits, items...
+        FactorAmount factorAmount = new FactorAmount(0, 0);
+        return factorAmount;
+    }
+
+    public double applyModifier(Modifier.Type type, double value) {
+        return this.getTotalModifier(type).calculate(value);
+    }
+
+    public int applyModifier(Modifier.Type type, int value) {
+        return (int) this.applyModifier(type, (double) value);
     }
 
     public static class Builder {
