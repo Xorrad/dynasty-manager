@@ -1,6 +1,7 @@
-package main.ui.controller;
+package main.ui.controllers;
 
 import main.core.Game;
+import main.ui.views.NewGameView;
 
 import java.awt.event.ActionEvent;
 
@@ -12,7 +13,7 @@ public class MainController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("clicked play");
+            this.game.getState().openView(new NewGameView(this.game));
         }
     }
 

@@ -1,11 +1,11 @@
-package main.ui.controller;
+package main.ui.controllers;
 
 import main.core.Game;
 
 import javax.swing.*;
 
 public abstract class Controller extends AbstractAction {
-    private Game game;
+    protected Game game;
 
     public Controller(Game game) {
         this.game = game;

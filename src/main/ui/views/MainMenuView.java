@@ -1,12 +1,12 @@
-package main.ui.view;
+package main.ui.views;
 
 import main.core.Game;
-import main.ui.controller.MainController;
+import main.ui.controllers.MainController;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class MainView extends View {
+public class MainMenuView extends View {
     private JPanel buttonsPanel;
     private JButton newGameButton;
     private JButton quitButton;
@@ -15,8 +15,8 @@ public class MainView extends View {
     private JLabel versionLabel;
     private JLabel creditsLabel;
 
-    public MainView(Game game) {
-        super(game);
+    public MainMenuView(Game game) {
+        super(game, "Main Menu");
     }
 
     @Override
