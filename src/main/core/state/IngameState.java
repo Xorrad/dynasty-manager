@@ -8,6 +8,9 @@ import main.ui.views.ingame.CharacterView;
 import main.ui.views.ingame.MainGameView;
 import main.ui.views.View;
 
+import java.util.OptionalInt;
+import java.util.stream.IntStream;
+
 public class IngameState extends GameState {
     private int viewIndex;
     private World world;
@@ -71,9 +74,15 @@ public class IngameState extends GameState {
 
     @Override
     public void openView(View view, boolean closePrevious) {
-        super.openView(view, closePrevious);
-        this.setViewIndex(this.views.size()-1);
+        // Check if this view isn't already opened.
+        OptionalInt optionalIndex = IntStream.range(0, this.views.size())
+            .filter(i-> this.views.get(i).equals(view))
+            .findFirst();
+        if(!optionalIndex.isPresent())
+            super.openView(view, closePrevious);
+        int i = optionalIndex.isPresent() ? optionalIndex.getAsInt() : this.views.size()-1;
+        this.setViewIndex(i);
         this.mainView.update();
-        this.mainView.getViewsPane().setSelectedIndex(this.views.size()-1);
+        this.mainView.getViewsPane().setSelectedIndex(i);
     }
 }
