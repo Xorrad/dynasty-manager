@@ -6,6 +6,7 @@ import main.ui.views.CharactersView;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 public class GameMenuBar extends JMenuBar {
     private Game game;
@@ -20,6 +21,7 @@ public class GameMenuBar extends JMenuBar {
                 game.getState().openView(new CharactersView(game));
             }
         });
+        charactersMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_DOWN_MASK));
         viewsMenu.add(charactersMenu);
 
         this.add(viewsMenu);
