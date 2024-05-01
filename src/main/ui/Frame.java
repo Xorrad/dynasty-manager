@@ -1,6 +1,7 @@
-package main.ui.views;
+package main.ui;
 
 import main.core.Game;
+import main.ui.views.MainMenuView;
 
 import javax.swing.*;
 

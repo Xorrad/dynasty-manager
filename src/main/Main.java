@@ -1,7 +1,7 @@
 package main;
 
 import main.core.Game;
-import main.ui.views.Frame;
+import main.ui.Frame;
 
 import javax.swing.*;
 
@@ -16,7 +16,6 @@ public class Main {
             @Override
             public void run() {
                 Game game = new Game();
-                Frame frame = new Frame(game);
             }
         });
 

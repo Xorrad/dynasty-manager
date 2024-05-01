@@ -4,7 +4,7 @@ import main.core.Game;
 import main.core.state.IngameState;
 import main.core.world.World;
 import main.core.world.character.Character;
-import main.ui.controllers.BackController;
+import main.ui.Observer;
 import main.ui.components.JTabbedPaneClosable;
 
 import javax.swing.*;
@@ -54,7 +54,6 @@ public class MainGameView extends View implements Observer {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Character characterTest = new Character.Builder(getWorld()).name("Karl").get();
-                state.openView(new CharacterView(game, characterTest));
             }
         });
 

@@ -2,14 +2,9 @@ package main.ui.views;
 
 import main.core.Game;
 import main.core.world.character.Character;
-import main.ui.controllers.BackController;
-import main.ui.controllers.NewGameController;
+import main.ui.Observer;
 
 import javax.swing.*;
-
-import java.awt.*;
-
-import static javax.swing.GroupLayout.Alignment.*;
 
 public class CharacterView extends View implements Observer {
     private Character character;
