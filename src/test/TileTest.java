@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TileTest {
     @Test
     public void testTile() {
-        World world = new World();
+        World world = new World(null);
         Tile t1 = new Tile(world, new Location(10, 1));
         assertFalse(t1.isGroup());
         assertEquals(new Location(10, 1), t1.getLocation());
@@ -36,7 +36,7 @@ public class TileTest {
 
     @Test
     public void testTileGroup() {
-        World world = new World();
+        World world = new World(null);
 
         TileGroup tg1 = new TileGroup(world);
         world.addObject(tg1);

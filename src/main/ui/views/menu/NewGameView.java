@@ -1,8 +1,9 @@
-package main.ui.views;
+package main.ui.views.menu;
 
 import main.core.Game;
 import main.ui.controllers.BackController;
 import main.ui.controllers.NewGameController;
+import main.ui.views.View;
 
 import javax.swing.*;
 

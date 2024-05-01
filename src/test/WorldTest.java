@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class WorldTest {
     @Test
     public void testWorldObject() {
-        World world = new World();
+        World world = new World(null);
         Character c1 = new Character(world);
         assertEquals(world, c1.getWorld());
         assertEquals(0, world.getObjects(WorldObject.Type.CHARACTER).size());

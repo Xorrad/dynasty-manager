@@ -1,7 +1,8 @@
-package main.ui.views;
+package main.ui.views.menu;
 
 import main.core.Game;
 import main.ui.controllers.MainController;
+import main.ui.views.View;
 
 import javax.swing.*;
 import java.awt.*;

@@ -6,8 +6,7 @@ import main.core.world.World;
 import main.core.world.character.Character;
 import main.core.world.dynasty.Dynasty;
 import main.core.world.dynasty.House;
-import main.ui.views.MainGameView;
-import main.ui.views.NewGameView;
+import main.ui.views.menu.NewGameView;
 import main.util.Location;
 
 import java.awt.event.ActionEvent;
@@ -23,7 +22,7 @@ public class NewGameController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            World world = new World();
+            World world = new World(this.game);
 
             // Extract information from textfields and other inputs.
             String characterName = this.view.getFirstnameField().getText();

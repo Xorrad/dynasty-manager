@@ -1,7 +1,7 @@
 package main.ui;
 
 import main.core.Game;
-import main.ui.views.CharactersView;
+import main.ui.views.ingame.CharactersView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

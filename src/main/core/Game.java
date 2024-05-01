@@ -3,7 +3,7 @@ package main.core;
 import main.core.state.GameState;
 import main.core.state.MainMenuState;
 import main.ui.Frame;
-import main.ui.views.MainMenuView;
+import main.ui.views.menu.MainMenuView;
 import main.ui.Observable;
 
 public class Game extends Observable {

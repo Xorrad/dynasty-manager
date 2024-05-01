@@ -1,7 +1,7 @@
 package main.ui.controllers;
 
 import main.core.Game;
-import main.ui.views.NewGameView;
+import main.ui.views.menu.NewGameView;
 
 import java.awt.event.ActionEvent;
 

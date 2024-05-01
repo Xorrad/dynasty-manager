@@ -1,5 +1,7 @@
 package main.core.world;
 
+import main.core.Game;
+import main.core.state.IngameState;
 import main.core.world.character.Character;
 import main.core.world.dynasty.Dynasty;
 import main.core.world.dynasty.House;
@@ -14,10 +16,12 @@ public class World {
     public static final int DEFAULT_MAP_WIDTH = 10;
     public static final int DEFAULT_MAP_HEIGHT = 10;
 
+    private Game game;
     public HashMap<WorldObject.Type, IdMap<WorldObject>> objects;
     public HashMap<Location, Tile> map;
 
-    public World() {
+    public World(Game game) {
+        this.game = game;
         this.initObjects();
         this.initDynasties();
         this.initMap();
@@ -28,6 +32,7 @@ public class World {
         if(type == null)
             throw new RuntimeException("world object does not have registered type.");
         this.objects.get(type).add(object);
+        if(this.game != null) this.game.notifyObservers();
     }
 
     public void removeObject(WorldObject object) {
@@ -35,6 +40,7 @@ public class World {
         if(type == null)
             throw new RuntimeException("world object does not have registered type.");
         this.objects.get(type).remove(object);
+        if(this.game != null) this.game.notifyObservers();
     }
 
     public <T extends WorldObject> IdMap<T> getObjects(WorldObject.Type type) {

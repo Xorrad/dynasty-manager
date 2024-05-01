@@ -1,8 +1,9 @@
-package main.ui.views;
+package main.ui.views.ingame;
 
 import main.core.Game;
 import main.core.world.character.Character;
 import main.ui.Observer;
+import main.ui.views.View;
 
 import javax.swing.*;
 
@@ -17,6 +18,7 @@ public class CharacterView extends View implements Observer {
     public CharacterView(Game game, Character character) {
         super(game, character.getName(), false);
         this.character = character;
+        this.game.addObserver(this);
         this.init();
     }
 

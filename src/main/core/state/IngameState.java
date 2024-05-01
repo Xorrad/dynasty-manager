@@ -4,8 +4,8 @@ import main.core.Game;
 import main.core.world.World;
 import main.core.world.character.Character;
 import main.ui.GameMenuBar;
-import main.ui.views.CharacterView;
-import main.ui.views.MainGameView;
+import main.ui.views.ingame.CharacterView;
+import main.ui.views.ingame.MainGameView;
 import main.ui.views.View;
 
 public class IngameState extends GameState {
