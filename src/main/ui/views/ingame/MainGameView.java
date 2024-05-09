@@ -44,6 +44,9 @@ public class MainGameView extends View implements Observer {
         viewsPane.setCloseTabConsumer(index -> {
             state.closeView(index);
         });
+        viewsPane.setSwitchTabConsumer(index -> {
+            this.state.setViewIndex(index);
+        });
 
 //        characterTab = new JPanel();
 //        viewsPane.insertTab(this.state.getPlayerCharacter().getName(), null, characterTab, "", 0);

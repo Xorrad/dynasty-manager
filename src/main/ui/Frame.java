@@ -1,9 +1,11 @@
 package main.ui;
 
 import main.core.Game;
+import main.ui.controllers.ShortcutsController;
 import main.ui.views.menu.MainMenuView;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Frame extends JFrame implements Observer {
     private Game game;
@@ -16,6 +18,10 @@ public class Frame extends JFrame implements Observer {
         this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
         this.setResizable(true);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+//        this.addKeyListener(new ShortcutsController(game));
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new ShortcutsController(game));
+
 
         this.add(new MainMenuView(game));
 

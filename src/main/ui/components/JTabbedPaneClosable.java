@@ -1,21 +1,38 @@
 package main.ui.components;
 
+import main.core.Game;
+
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class JTabbedPaneClosable extends JTabbedPane {
     private Consumer<Integer> closeTabConsumer;
+    private Consumer<Integer> switchTabConsumer;
 
     public JTabbedPaneClosable() {
         super();
         this.closeTabConsumer = (i) -> {};
+        this.switchTabConsumer = (i) -> {};
+
+        this.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                switchTabConsumer.accept(getSelectedIndex());
+            }
+        });
     }
 
     public void setCloseTabConsumer(Consumer<Integer> closeTabConsumer) {
         this.closeTabConsumer = closeTabConsumer;
+    }
+
+    public void setSwitchTabConsumer(Consumer<Integer> switchTabConsumer) {
+        this.switchTabConsumer = switchTabConsumer;
     }
 
     @Override

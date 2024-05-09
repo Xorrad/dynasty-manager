@@ -67,6 +67,25 @@ public class IngameState extends GameState {
         this.viewIndex = viewIndex;
     }
 
+    public void updateView() {
+        this.game.notifyObservers();
+        this.mainView.update();
+        this.mainView.getViewsPane().setSelectedIndex(this.viewIndex);
+    }
+
+    @Override
+    public void closeView() {
+        this.closeView(this.viewIndex);
+    }
+
+    @Override
+    public void closeView(int index) {
+        this.views.remove(index);
+        if(index > this.viewIndex || this.views.size() <= this.viewIndex)
+            this.viewIndex--;
+        this.updateView();
+    }
+
     @Override
     public void openView(View view) {
         this.openView(view, false);
@@ -82,7 +101,6 @@ public class IngameState extends GameState {
             super.openView(view, closePrevious);
         int i = optionalIndex.isPresent() ? optionalIndex.getAsInt() : this.views.size()-1;
         this.setViewIndex(i);
-        this.mainView.update();
-        this.mainView.getViewsPane().setSelectedIndex(i);
+        this.updateView();
     }
 }
