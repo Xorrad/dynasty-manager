@@ -59,6 +59,10 @@ public class World {
         return map;
     }
 
+    public Game getGame() {
+        return game;
+    }
+
     private void initObjects() {
         this.objects = new HashMap<>();
         for(WorldObject.Type type : WorldObject.Type.values()) {
