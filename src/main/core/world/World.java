@@ -6,6 +6,7 @@ import main.core.world.character.Character;
 import main.core.world.dynasty.Dynasty;
 import main.core.world.dynasty.House;
 import main.core.world.map.Tile;
+import main.util.Date;
 import main.util.IdMap;
 import main.util.Location;
 import main.util.Vector2;
@@ -19,9 +20,11 @@ public class World {
     private Game game;
     public HashMap<WorldObject.Type, IdMap<WorldObject>> objects;
     public HashMap<Location, Tile> map;
+    public Date date;
 
     public World(Game game) {
         this.game = game;
+        this.date = new Date(0, 1, 1);
         this.initObjects();
         this.initDynasties();
         this.initMap();
@@ -89,5 +92,9 @@ public class World {
                 this.map.put(location, tile);
             }
         }
+    }
+
+    public Date getDate() {
+        return date;
     }
 }

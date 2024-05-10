@@ -22,7 +22,8 @@ public class Modifier {
 
     public enum Type {
         MONTHLY_GOLD_INCOME("Amount of gold earned each month.", Character.class),
-        HEALTH("Health of a character.", Character.class)
+        HEALTH("Health of a character.", Character.class),
+        FERTILITY("Probability of producing offsprings.", Character.class),
         ;
 
         private String description;

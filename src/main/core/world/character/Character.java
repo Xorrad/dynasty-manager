@@ -8,11 +8,14 @@ import main.core.world.dynasty.House;
 import main.core.world.modifier.FactorAmount;
 import main.core.world.modifier.Modifier;
 import main.core.world.title.Title;
+import main.core.world.trait.PregnantTrait;
 import main.core.world.trait.Trait;
+import main.util.Date;
 import main.util.Location;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Character extends WorldObject {
     private String name;
@@ -21,6 +24,8 @@ public class Character extends WorldObject {
     private ArrayList<Title> titles;
     private ArrayList<Trait> traits;
     private Location location;
+    private Date birthday;
+    private Gender gender;
 
     public Character(World world) {
         super(world);
@@ -29,6 +34,8 @@ public class Character extends WorldObject {
         this.titles = new ArrayList<>();
         this.traits = new ArrayList<>();
         this.location = new Location(0, 0);
+        this.birthday = world.getDate();
+        this.gender = Gender.MALE;
     }
 
     public String getName() {
@@ -120,6 +127,14 @@ public class Character extends WorldObject {
         this.traits.remove(title);
     }
 
+    public boolean hasTrait(Class<? extends Trait> clazz) {
+        for(Trait t : this.traits) {
+            if(clazz.isAssignableFrom(t.getClass()))
+                return true;
+        }
+        return false;
+    }
+
     public boolean hasTrait(Trait title) {
         return this.traits.contains(title);
     }
@@ -138,7 +153,14 @@ public class Character extends WorldObject {
 
     public FactorAmount getTotalModifier(Modifier.Type type) {
         // Initialize à default value and increment it with all the modifiers in traits, items...
-        FactorAmount factorAmount = new FactorAmount(0, 0);
+        FactorAmount factorAmount = new FactorAmount(1.0, 0);
+
+        for(Trait trait : this.traits) {
+            for(Modifier m : trait.getModifiers(type)) {
+                factorAmount.add(m.getNumberModifier());
+            }
+        }
+
         return factorAmount;
     }
 
@@ -148,6 +170,49 @@ public class Character extends WorldObject {
 
     public int applyModifier(Modifier.Type type, int value) {
         return (int) this.applyModifier(type, (double) value);
+    }
+
+    public int getAge() {
+        return this.getWorld().getDate().getYear() - birthday.getYear();
+    }
+
+    public double getFertilityModifier() {
+        double fertility = 1.0;
+
+        // Add age modifier.
+        fertility = Math.exp(-0.05*this.getAge());
+
+        // Apply modifiers.
+        fertility = getTotalModifier(Modifier.Type.FERTILITY).calculate(fertility);
+
+        return fertility;
+    }
+
+    public void layWith(Character target) {
+        Random ran = new Random();
+
+        // TODO: Add a secret.
+
+        Character mother = this.gender == Gender.FEMALE ? this : (target.gender == Gender.FEMALE ? target : null);
+        Character father = this.gender == Gender.MALE ? this : (target.gender == Gender.MALE ? target : null);
+        if(mother != null && father != null && !this.hasTrait(PregnantTrait.class)) {
+            double fertility = this.getFertilityModifier();
+            if (ran.nextDouble() >= fertility) {
+                this.addTrait(new PregnantTrait(mother, father, getWorld().getDate()));
+            }
+        }
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     public static class Builder {
@@ -173,8 +238,29 @@ public class Character extends WorldObject {
             return this;
         }
 
+        public Character.Builder birthday(Date birthday) {
+            this.character.birthday = birthday;
+            return this;
+        }
+
+        public Character.Builder gender(Gender gender) {
+            this.character.gender = gender;
+            return this;
+        }
+
+        public Character.Builder trait(Trait trait) {
+            this.character.addTrait(trait);
+            return this;
+        }
+
         public Character get() {
             return this.character;
         }
+    }
+
+    public enum Gender {
+        MALE,
+        FEMALE,
+        OTHER;
     }
 }
