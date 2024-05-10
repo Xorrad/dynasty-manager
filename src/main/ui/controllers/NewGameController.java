@@ -6,6 +6,7 @@ import main.core.world.World;
 import main.core.world.character.Character;
 import main.core.world.dynasty.Dynasty;
 import main.core.world.dynasty.House;
+import main.core.world.trait.Traits;
 import main.ui.views.menu.NewGameView;
 import main.util.Location;
 
@@ -37,6 +38,7 @@ public class NewGameController {
                     .name(characterName)
                     .house(playerHouse)
                     .location(new Location(0, 0))
+                    .trait(Traits.ATHLETIC)
                     .get();
 
             this.game.setState(new IngameState(this.game, world, playerCharacter.getId()));

@@ -2,6 +2,7 @@ package main.ui.views.ingame;
 
 import main.core.Game;
 import main.core.world.character.Character;
+import main.core.world.trait.Trait;
 import main.ui.Observer;
 import main.ui.views.View;
 
@@ -16,6 +17,8 @@ public class CharacterView extends View implements Observer {
     private JLabel dynastyLabel;
     private JLabel houseLabel;
 
+    private JPanel traitsPanel;
+
     public CharacterView(Game game, Character character) {
         super(game, character.getName(), false);
         this.character = character;
@@ -25,8 +28,10 @@ public class CharacterView extends View implements Observer {
 
     @Override
     public void init() {
-        infoPanel = new JPanel();
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+        // Information panel.
+        infoPanel = new JPanel();
         firstnameLabel = new JLabel("Name: ");
         dynastyLabel = new JLabel("Dynasty: ");
         houseLabel = new JLabel("House: ");
@@ -35,10 +40,12 @@ public class CharacterView extends View implements Observer {
         infoPanel.add(firstnameLabel);
         infoPanel.add(dynastyLabel);
         infoPanel.add(houseLabel);
-
-        BoxLayout layoutMain = new BoxLayout(this, BoxLayout.Y_AXIS);
-        this.setLayout(layoutMain);
         this.add(infoPanel);
+
+        // Traits panel.
+        traitsPanel = new JPanel();
+        this.add(traitsPanel);
+
 
         this.update();
     }
@@ -48,6 +55,13 @@ public class CharacterView extends View implements Observer {
         firstnameLabel.setText("Name: " + character.getName());
         dynastyLabel.setText("Dynasty: " + character.getDynasty().getName());
         houseLabel.setText("House: " + character.getHouse().getName());
+
+        traitsPanel.removeAll();
+        for(Trait trait : character.getTraits()) {
+            JLabel traitLabel = new JLabel(trait.getName());
+            traitsPanel.add(traitLabel);
+        }
+        traitsPanel.repaint();
     }
 
     @Override
