@@ -2,6 +2,7 @@ package main;
 
 import main.core.Game;
 import main.ui.Frame;
+import main.ui.Resources;
 
 import javax.swing.*;
 
@@ -12,6 +13,8 @@ public class Main {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
+        Resources.initImages();
+
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
