@@ -1,23 +1,29 @@
 package main.core.world.trait;
 
 import main.core.world.modifier.Amount;
+import main.core.world.modifier.Factor;
 import main.core.world.modifier.Modifier;
+import main.ui.Resources;
 
+import java.awt.image.BufferedImage;
 import java.util.Arrays;
 import java.util.List;
 
 public enum Traits implements Trait {
     ATHLETIC(
             "This character like exercising his body.",
+            Resources.Images.ATHLETIC_TRAIT,
             new Modifier(Modifier.Type.HEALTH, new Amount(1))
     )
     ;
 
     private String description;
+    private BufferedImage icon;
     private List<Modifier> modifiers;
 
-    Traits(String description, Modifier... modifiers) {
+    Traits(String description, Resources.Images icon, Modifier... modifiers) {
         this.description = description;
+        this.icon = icon.get();
         this.modifiers = Arrays.asList(modifiers);
     }
 
@@ -27,6 +33,11 @@ public enum Traits implements Trait {
 
     public String getDescription() {
         return this.description;
+    }
+
+    @Override
+    public BufferedImage getIcon() {
+        return icon;
     }
 
     @Override

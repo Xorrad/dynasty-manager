@@ -4,12 +4,22 @@ import main.core.world.WorldObject;
 import main.core.world.character.Character;
 
 public class Modifier {
+    private String identifier;
     private Type type;
     private FactorAmount factorAmount;
 
     public Modifier(Type type, FactorAmount factorAmount) {
+        this.identifier = type.name().toLowerCase();
         this.type = type;
         this.factorAmount = factorAmount;
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public String getName() {
+        return this.identifier.replaceAll("_", " ");
     }
 
     public Type getType() {

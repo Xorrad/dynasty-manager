@@ -4,6 +4,7 @@ import main.core.Game;
 import main.core.world.character.Character;
 import main.core.world.trait.Trait;
 import main.ui.Observer;
+import main.ui.components.JTraitIcon;
 import main.ui.views.View;
 
 import javax.swing.*;
@@ -58,8 +59,9 @@ public class CharacterView extends View implements Observer {
 
         traitsPanel.removeAll();
         for(Trait trait : character.getTraits()) {
-            JLabel traitLabel = new JLabel(trait.getName());
-            traitsPanel.add(traitLabel);
+//            JLabel traitLabel = new JLabel(trait.getName());
+            JTraitIcon traitIcon = new JTraitIcon(trait);
+            traitsPanel.add(traitIcon);
         }
         traitsPanel.repaint();
     }

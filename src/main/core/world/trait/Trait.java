@@ -2,6 +2,7 @@ package main.core.world.trait;
 
 import main.core.world.modifier.Modifier;
 
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 public interface Trait {
@@ -12,4 +13,5 @@ public interface Trait {
     boolean hasModifier(Modifier modifier);
     List<Modifier> getModifiers();
     List<Modifier> getModifiers(Modifier.Type type);
+    BufferedImage getIcon();
 }

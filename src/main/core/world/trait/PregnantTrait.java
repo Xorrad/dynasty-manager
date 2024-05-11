@@ -2,7 +2,10 @@ package main.core.world.trait;
 
 import main.core.world.character.Character;
 import main.core.world.modifier.Modifier;
+import main.ui.Resources;
 import main.util.Date;
+
+import java.awt.image.BufferedImage;
 
 public class PregnantTrait extends CustomTrait {
     private Character mother;
@@ -10,7 +13,7 @@ public class PregnantTrait extends CustomTrait {
     private Date date;
 
     public PregnantTrait(Character mother, Character father, Date date) {
-        super("Pregnant", "");
+        super("Pregnant", "", Resources.Images.PREGNANT_TRAIT.get());
         this.mother = mother;
         this.father = father;
         this.date = date;

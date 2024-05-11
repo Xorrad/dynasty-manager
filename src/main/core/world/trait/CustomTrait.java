@@ -2,6 +2,7 @@ package main.core.world.trait;
 
 import main.core.world.modifier.Modifier;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -9,11 +10,13 @@ import java.util.List;
 public class CustomTrait implements Trait {
     private String name;
     private String description;
+    private BufferedImage icon;
     private List<Modifier> modifiers;
 
-    public CustomTrait(String name, String description, Modifier... modifiers) {
+    public CustomTrait(String name, String description, BufferedImage icon, Modifier... modifiers) {
         this.name = name;
         this.description = description;
+        this.icon = icon;
         this.modifiers = Arrays.asList(modifiers);
     }
 
@@ -48,5 +51,10 @@ public class CustomTrait implements Trait {
         return this.modifiers.stream()
                 .filter(m -> m.getType().equals(type))
                 .toList();
+    }
+
+    @Override
+    public BufferedImage getIcon() {
+        return this.icon;
     }
 }
