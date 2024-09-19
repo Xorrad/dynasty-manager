@@ -195,10 +195,12 @@ public class Character extends WorldObject {
 
         Character mother = this.gender == Gender.FEMALE ? this : (target.gender == Gender.FEMALE ? target : null);
         Character father = this.gender == Gender.MALE ? this : (target.gender == Gender.MALE ? target : null);
-        if(mother != null && father != null && !this.hasTrait(PregnantTrait.class)) {
-            double fertility = this.getFertilityModifier();
+        if(mother != null && father != null && !mother.hasTrait(PregnantTrait.class)) {
+            double motherFertility = mother.getFertilityModifier();
+            double fatherFertility = father.getFertilityModifier();
+            double fertility = (motherFertility + fatherFertility)/2.0;
             if (ran.nextDouble() >= fertility) {
-                this.addTrait(new PregnantTrait(mother, father, getWorld().getDate()));
+                mother.addTrait(new PregnantTrait(mother, father, getWorld().getDate()));
             }
         }
     }
