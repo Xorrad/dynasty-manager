@@ -12,6 +12,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class CharactersView extends View implements Observer {
@@ -73,17 +75,32 @@ public class CharactersView extends View implements Observer {
     public void update() {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
 
+        int selectedRows[] = table.getSelectedRows();
+        HashMap<Integer, Boolean> selectedCharacterIds = new HashMap<>();
+        for(int row : selectedRows) {
+            selectedCharacterIds.put((int) model.getValueAt(row, 0), false);
+        }
+        ArrayList<Integer> selectedCharacterRows = new ArrayList<>();
+
         // Remove all rows from the table.
         model.getDataVector().removeAllElements();
 
         for(Character character : getWorld().getCharacters().values()) {
+            int row = model.getRowCount();
             model.addRow(new Object[]{
                     character.getId(),
                     character.getName(),
                     character.getHouse().getName(),
                     character.getDynasty().getName()
             });
+            if(selectedCharacterIds.containsKey(character.getId())) {
+//                selectedCharacterIds.put(character.getId(), true);
+                selectedCharacterRows.add(row);
+            }
         }
+
+        if(!selectedCharacterRows.isEmpty())
+            table.setRowSelectionInterval(selectedCharacterRows.get(0), selectedCharacterRows.get(selectedCharacterRows.size()-1));
 
         table.revalidate();
         table.repaint();
